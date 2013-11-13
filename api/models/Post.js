@@ -6,25 +6,27 @@
  * @docs		:: http://sailsjs.org/#!documentation/models
  */
 
-module.exports = {
-
+var Post = {
   attributes: {
-  	
-  	/* e.g.
-  	nickname: 'string'
-  	*/
+    
+    /* e.g.
+    nickname: 'string'
+    */
     
     id : 'INTEGER',
 
-    title	: 'STRING',
+    title : 'STRING',
 
-    author	: 'STRING',
+    author  : 'STRING',
 
     content : 'STRING',
 
-    created	: 'DATE',
+    created : 'DATE',
 
-    modified	: 'DATE'
+    modified  : 'DATE'
   }
 
 };
+
+
+module.exports = Post;
