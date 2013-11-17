@@ -27,7 +27,7 @@ module.exports = {
     var dateFormat = require('dateformat');
     Post.find(function(err, posts) {
       posts.forEach(function(post) {
-        post.createdAt = dateFormat(post.createdAt, "dddd, mmmm, dS, yyyy, @ h-8:MM TT");
+        post.createdAt = dateFormat(post.createdAt, "dddd, mmmm, dS, yyyy, @ h:MM TT");
       });
       res.view({ model: posts });
     });
