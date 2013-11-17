@@ -44,6 +44,7 @@ module.exports = {
                 if (hasher.verify(password, admin.password)) {
                   req.session.admin = true;
                   console.log('admin in');
+                  return res.redirect('/');
                 } else {
                   res.set('error', 'Password is incorrect.');
                   res.send(400, { error: "Password is incorrect." });
