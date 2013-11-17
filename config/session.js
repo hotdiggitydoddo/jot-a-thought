@@ -30,7 +30,7 @@ module.exports.session = {
    port: 9215,
   // ttl: <redis session TTL in seconds>,
    db: 'redistogo',
-   pass: '753259e366f6d59f0bd755296fa8443b'
+   pass: '753259e366f6d59f0bd755296fa8443b',
 
 
   // Uncomment the following lines to use your Mongo adapter as a session store
