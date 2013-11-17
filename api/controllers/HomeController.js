@@ -25,12 +25,24 @@ module.exports = {
    */
    index: function (req, res) {
     var dateFormat = require('dateformat');
-    Post.find(function(err, posts) {
+    
+    Post.find()
+    .limit(10)
+    .sort('createdAt')
+    .exec(function(err, posts) {
       posts.forEach(function(post) {
         post.createdAt = dateFormat(post.createdAt, "dddd, mmmm, dS, yyyy, @ h:MM TT");
       });
       res.view({ model: posts });
     });
+
+
+    //Post.find(function(err, posts) {
+      //posts.forEach(function(post) {
+        //post.createdAt = dateFormat(post.createdAt, "dddd, mmmm, dS, yyyy, @ h:MM TT");
+      //});
+      //res.view({ model: posts });
+    //});
   },
 
 
@@ -65,43 +77,7 @@ module.exports = {
   },
 
   login: function (req, res) {
-    var username = req.param("username");
-    var password = req.param("password");
-
-    if (username) {
-      if (username == 'create-admin') {
-        var hasher = require("password-hash");
-        password = hasher.generate(password);
-        Admin.create({username: 'admin', password: password}).done(function(err, admin) {
-        if (err) {
-          console.log(err);
-        }
-        else if (admin)
-          console.log(admin);
-        });
-      } else if (username == 'admin') {
-          Admin.findOneByUsername(username).done(function(err, admin) {
-            if (err) {
-              res.set('error, DB Error');
-              res.send(500, { error: "DB Error"});
-            } else {
-              if (admin) {
-                var hasher = require("password-hash");
-                if (hasher.verify(password, admin.password)) {
-                  req.session.admin = true;
-                  console.log('admin in');
-                } else {
-                  res.set('error', 'Password is incorrect.');
-                  res.send(400, { error: "Password is incorrect." });
-                }
-              } 
-            }
-          });
-        } else {
-          res.set('error', "Admin access only.");
-          res.send(400, { error: "Admin access only."});
-        } 
-      }
+    
 
     if (username && username == "CREATE_ADMIN") {
       
