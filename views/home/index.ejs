@@ -5,14 +5,14 @@
 			<h3><%- post.title %></h3>
 			<h5 class="postDetails"><%-post.createdAt %></h5> 
 			<p><%- post.content %></p>
-			<% if (session.admin) { %>
+			<% if (req.session.admin) { %>
 					<a href="/post/update?id=<%-post.id%>">edit</a>
 					<a href="/post/delete?id=<%-post.id%>">delete</a>
 			<%} %>
 		</div>
 		<br />
 	<% }) %>
-<% if (session.admin) { %>
+<% if (!req.session.admin) { %>
 	<button id="loginButton" class="btn btn-xs btn-info">Login</button>
 <% } %>
 <form id="loginForm" style="display: none ">
