@@ -31,10 +31,10 @@ module.exports.adapters = {
   herokuPostgresql: {
 
     module: 'sails-postgresql',
-    database: 'd5th9n0ej1krru',
-    host: 'ec2-54-204-41-178.compute-1.amazonaws.com',
-    user: 'utfiokcqjvpyis',
-    password: '86W4ZK9BI9ad0ap9gskttBludV',
+    database: 'd12vq6scd6kjm9',
+    host: 'ec2-54-204-41-249.compute-1.amazonaws.com',
+    user: 'aeutqhmypwcxsu',
+    password: 'q3eQ9Q9n60CGjboONzNdemu8YC',
     port: 5432
   }
 
