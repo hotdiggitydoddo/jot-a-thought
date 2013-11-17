@@ -4,8 +4,11 @@
 			<a class="navbar-brand" style="color:white" href="/">jot-a-thought!</a>
 		</div>
 		<div class="navbar-collapse collapse">
+			<div id="adminLogin">
+			</div>
 			<% if (req.session.admin) { %>
 					<div class="navbar-right">
+						<button id="composePostButton" class="btn btn-xs btn-success">Compose</button>
 						<button id="logoutButton" class="btn btn-xs btn-success">Logout</button>
 					</div>
 			<% } %>
@@ -16,6 +19,12 @@
 <script>
 	$("#logoutButton").click(function() {
 		$.post('/logout', {}, function() { window.location = "/"; } 
+		).fail(function(res) {
+			alert("Error: " + res.getResponseHeader("error"));
+		});
+	});
+	$("#composePostButton").click(function() {
+		$.post('/post/new', {}, function() { window.location = "/post/new"; } 
 		).fail(function(res) {
 			alert("Error: " + res.getResponseHeader("error"));
 		});

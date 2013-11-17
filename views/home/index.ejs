@@ -7,14 +7,15 @@
 			<p><%- post.content %></p>
 			<% if (req.session.admin) { %>
 					<a href="/post/update?id=<%-post.id%>">edit</a>
+					<a href="/post/delete?id=<%-post.id%>">delete</a>
 			<%} %>
 		</div>
 		<br />
 	<% }) %>
 
-
-<button id="loginButton" class="btn btn-xs btn-info">Login</button>
-
+<% if (!req.session.admin) { %>
+	<button id="loginButton" class="btn btn-xs btn-info">Login</button>
+<% } %>
 <form id="loginForm" style="display: none ">
 	<div class="form-group">
 		<input id="usernameInput" type="text" class="form-control" placeholder="Username" />

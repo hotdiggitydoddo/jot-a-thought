@@ -5,30 +5,45 @@
 	</div>
 	<div class="form-group">
 		<label for="contentInput">Content</label>
-		<textarea class="form-control" rows="10" id="contentInput"><%-post.content%>"</textarea>
+		<textarea class="form-control" rows="10" id="contentInput"><%-post.content%></textarea>
 	</div>
-	<button id="createPostButton" type="submit" class="btn btn-success">Create</button>
+		<input type="hidden" value="<%-post.id%>" id="postId"/>
+	
+		<button id="createPostButton" type="submit" class="btn btn-success">Create</button>
+
 </form>
-<%if (post) { %>
-		
-	<% }; %>
+
 
 <script type="text/javascript">
 	$("#createPostButton").click(function() {
 		event.preventDefault();
 		var title = $("#titleInput").val();
-		var content = $("#contentInput").val();
+		var content = $("#contentInput").val();				
+		var id = $("#postId").val();
 
 		if (title && content) {
-			$.post(
-				'/post/create',
-				{title: title, content: content},
-				function() {
-					window.location = "/";
-				}
-			).fail(function(res) {
-				alert("Error: " + res.getResponseHeader("error"));
-			});
+			if (id == "" ) {
+				$.post(
+					'/post/create',
+					{title: title, content: content},
+					function() {
+						window.location = "/";
+					}
+				).fail(function(res) {
+					alert("Error: " + res.getResponseHeader("error"));
+				});	
+			} else {
+				console.log(id);
+				$.post(
+					'/post/edit',
+					{title: title, content: content, id: id},
+					function() {
+						window.location = "/";
+					}
+				).fail(function(res) {
+					alert("Error: " + res.getResponseHeader("error"));
+				});
+			}
 		} else {
 			alert("Error:  Please complete all fields")
 		}

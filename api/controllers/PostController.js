@@ -28,7 +28,10 @@ module.exports = {
 
   'new': function (req ,res) {
     res.locals.post = _.clone(req.session.post);
-    res.view();
+    if (res.locals.post)
+      res.view({post: res.locals.post});
+    else
+      res.view({post: [{title: ""}, {content: ""}]});
     req.session.post = {};
   },
   /**
@@ -38,7 +41,7 @@ module.exports = {
    create: function (req, res) {
     var title = req.param("title");
     var content = req.param("content");
-    
+
     Post.create( {author: 'Ryan', title: title, content: content}).done(function(error, post) {
       if (error) {
         res.set('error', 'DB Error');
@@ -49,8 +52,25 @@ module.exports = {
     });
   },
 
-  'edit': function(req, res) {
-    
+  edit: function(req, res) {
+    var id = req.param("id");
+    console.log("in the edit");
+    var postToUpdate = Post.findOne(id).done(function(err, post) {
+      if (err) {
+        res.set('error', 'DB Error');
+        res.send(500, { error: 'DB Error'});
+      }
+        console.log("updating post");
+
+      if (post) {
+        post.title = req.param("title");
+        post.content = req.param("content");
+        post.save(function(err) {
+          console.log("save");
+        });
+      }
+    });
+    res.redirect('/');
   },
   /**
    * Action blueprints:
@@ -78,13 +98,7 @@ module.exports = {
    * Action blueprints:
    *    `/posts/edit`
    */
-   edit: function (req, res) {
-    
-    // Send a JSON response
-    return res.json({
-      hello: 'world'
-    });
-  },
+   
 
 
   /**
@@ -92,10 +106,23 @@ module.exports = {
    *    `/posts/delete`
    */
    delete: function (req, res) {
-    
-    // Send a JSON response
-    return res.json({
-      hello: 'world'
+    var id = req.param("id");
+    var postToDestroy = Post.findOne(id).done(function(err, post) {
+      if (err) {
+        res.set('error', 'DB Error');
+        res.send(500, { error: 'DB Error'});
+      }
+
+      if (post) {
+        post.destroy(function(err) {
+          if (err) {
+            res.set('error', 'DB Error');
+            res.send(500, { error: 'DB Error'});
+          }
+          // post destroyed.
+          res.redirect('/');
+        });
+      }
     });
   },
 
