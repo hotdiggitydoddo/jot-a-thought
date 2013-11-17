@@ -29,7 +29,6 @@ module.exports = {
     Post.find()
     .limit(10)
     .sort('createdAt')
-    .reverse()
     .exec(function(err, posts) {
       posts.forEach(function(post) {
         post.createdAt = dateFormat(post.createdAt, "dddd, mmmm, dS, yyyy, @ h:MM TT");
