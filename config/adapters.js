@@ -36,7 +36,7 @@ module.exports.adapters = {
     user: 'aeutqhmypwcxsu',
     password: 'q3eQ9Q9n60CGjboONzNdemu8YC',
     port: 5432
-  }
+  },
 
   // MySQL is the world's most popular relational database.
   // Learn more: http://en.wikipedia.org/wiki/MySQL
