@@ -16,7 +16,7 @@ module.exports.adapters = {
 
   // If you leave the adapter config unspecified 
   // in a model definition, 'default' will be used.
-  'default': 'disk',
+  'default': 'herokuPostgresql',
 
   // Persistent adapter for DEVELOPMENT ONLY
   // (data is preserved when the server shuts down)
@@ -27,6 +27,16 @@ module.exports.adapters = {
   memory: {
     module: 'sails-memory'
   },
+
+  herokuPostgresql: {
+
+    module: 'sails-postgresql',
+    database: 'd5k3p4imo16h91',
+    host: 'ec2-54-225-106-227.compute-1.amazonaws.com',
+    user: 'kzgzvaptkxcfzm',
+    password: 'pjwlQYxC-fTPcgr70bmC5SGuNW',
+    port: 5432
+  }
 
   // MySQL is the world's most popular relational database.
   // Learn more: http://en.wikipedia.org/wiki/MySQL
