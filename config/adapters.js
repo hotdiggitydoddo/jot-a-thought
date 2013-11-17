@@ -24,6 +24,10 @@ module.exports.adapters = {
     module: 'sails-disk'
   },
 
+  memory: {
+    module: 'sails-memory'
+  },
+
   // MySQL is the world's most popular relational database.
   // Learn more: http://en.wikipedia.org/wiki/MySQL
   myLocalMySQLDatabase: {

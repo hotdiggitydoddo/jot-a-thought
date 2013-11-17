@@ -27,7 +27,9 @@ module.exports = {
   },
 
   'new': function (req ,res) {
+    res.locals.post = _.clone(req.session.post);
     res.view();
+    req.session.post = {};
   },
   /**
    * Action blueprints:
@@ -42,21 +44,32 @@ module.exports = {
         res.set('error', 'DB Error');
         res.send(500, { error: 'DB Error'});
       } else {
-        res.redirect('/');
+        res.redirect('/home/index');
       }
     });
   },
 
-
+  'edit': function(req, res) {
+    
+  },
   /**
    * Action blueprints:
    *    `/posts/update`
    */
    update: function (req, res) {
     
-    // Send a JSON response
-    return res.json({
-      hello: 'world'
+    var id = req.param("id");
+    var postToEdit = Post.findOne(id).done(function(err, post) {
+      if (err) {
+        res.set('error', 'DB Error');
+        res.send(500, { error: 'DB Error'});
+      };
+
+      if (post) {
+        req.session.post = post;
+        res.redirect('/post/new');
+      };
+
     });
   },
 

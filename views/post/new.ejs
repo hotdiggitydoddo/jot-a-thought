@@ -1,3 +1,36 @@
 <form id="newPostForm">
-	<label>Title</label>
+	<div class="form-group">
+		<label for="titleInput">Title</label>
+		<input type="text" class="form-control" id="titleInput" value="<%-post.title%>">
+	</div>
+	<div class="form-group">
+		<label for="contentInput">Content</label>
+		<textarea class="form-control" rows="10" id="contentInput"><%-post.content%>"</textarea>
+	</div>
+	<button id="createPostButton" type="submit" class="btn btn-success">Create</button>
 </form>
+<%if (post) { %>
+		
+	<% }; %>
+
+<script type="text/javascript">
+	$("#createPostButton").click(function() {
+		event.preventDefault();
+		var title = $("#titleInput").val();
+		var content = $("#contentInput").val();
+
+		if (title && content) {
+			$.post(
+				'/post/create',
+				{title: title, content: content},
+				function() {
+					window.location = "/";
+				}
+			).fail(function(res) {
+				alert("Error: " + res.getResponseHeader("error"));
+			});
+		} else {
+			alert("Error:  Please complete all fields")
+		}
+	});
+</script> 
