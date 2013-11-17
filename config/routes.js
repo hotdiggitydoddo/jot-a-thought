@@ -39,7 +39,7 @@ module.exports.routes = {
 
   '/login': {
     controller: 'session',
-    action: 'new'
+    action: 'create'
   },
 
   '/logout': {

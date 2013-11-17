@@ -17,7 +17,7 @@
 
 module.exports = {
     
-'new': function(req, res) {
+create: function(req, res, next) {
 
 	var username = req.param("username");
     var password = req.param("password");
@@ -27,12 +27,15 @@ module.exports = {
         var hasher = require("password-hash");
         password = hasher.generate(password);
         Admin.create({username: 'admin', password: password}).done(function(err, admin) {
-        if (err) {
-          console.log(err);
-        }
-        else if (admin)
-          console.log(admin);
-        });
+        	if (err) {
+          		console.log(err);
+        	}
+        	else if (admin) {
+          		req.session.admin = true;
+          		return res.redirect('/');
+        	}
+    	});
+
       } else if (username == 'admin') {
           Admin.findOneByUsername(username).done(function(err, admin) {
             if (err) {
@@ -57,8 +60,7 @@ module.exports = {
           res.send(400, { error: "Admin access only."});
         } 
       }
-	res.redirect('/');
-},  
+	},  
 
 
   /**
