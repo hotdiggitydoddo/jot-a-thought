@@ -16,7 +16,7 @@ module.exports.adapters = {
 
   // If you leave the adapter config unspecified 
   // in a model definition, 'default' will be used.
-  'default': 'sails-postgresql',
+  'default': 'herokuPostgresql',
 
   // Persistent adapter for DEVELOPMENT ONLY
   // (data is preserved when the server shuts down)
@@ -31,10 +31,10 @@ module.exports.adapters = {
   herokuPostgresql: {
 
     module: 'sails-postgresql',
-    database: 'd12vq6scd6kjm9',
-    host: 'ec2-54-204-41-249.compute-1.amazonaws.com',
-    user: 'aeutqhmypwcxsu',
-    password: 'q3eQ9Q9n60CGjboONzNdemu8YC',
+    database: 'd8j54ihdd4hj43',
+    host: 'ec2-54-204-35-132.compute-1.amazonaws.com',
+    user: 'ckdcmknamxdzmx',
+    password: 't7mcgXARkHOIwX31COwIxfrgtH',
     port: 5432
   },
 
