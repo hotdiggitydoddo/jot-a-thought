@@ -12,7 +12,7 @@
 		</div>
 		<br />
 	<% }) %>
-	<%-console.log(req.session);%>
+	<p><%-console.log(req.session)%></p>
 <% if (!req.session.admin) { %>
 	<button id="loginButton" class="btn btn-xs btn-info">Login</button>
 <% } %>
